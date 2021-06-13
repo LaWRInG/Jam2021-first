@@ -31,6 +31,7 @@ public class PlayerControls : MonoBehaviour
 
     [Header("Combat")]
     public bool attacking;
+    public bool attackL;
     [SerializeField] float attackRange = 0.5f;
     [SerializeField] LayerMask enemyLayers;
     [SerializeField] Transform attackPoint;
@@ -100,9 +101,13 @@ public class PlayerControls : MonoBehaviour
     public void AttackR(InputAction.CallbackContext context)
     {
         Debug.Log("click");
-        float isAttack = context.ReadValue<float>();
         if (context.performed)
         {
+            if (transform.localScale == new Vector3(-1f, 1, 1f))
+            {
+                transform.localScale = Vector3.one;
+            }
+
             attacking = true;
 
             Collider2D[] hitEnimies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
@@ -114,7 +119,29 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
- 
+    public void AttackL(InputAction.CallbackContext context)
+    {
+        Debug.Log("click");
+        if (context.performed)
+        {
+            if (transform.localScale == Vector3.one)
+            {
+                transform.localScale = new Vector3(-1f, 1, 1f);
+            }
+
+            attackL = true;
+            attacking = true;
+
+            Collider2D[] hitEnimies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+            foreach (Collider2D enemy in hitEnimies)
+            {
+                Debug.Log("hit");
+            }
+        }
+    }
+
+
 
     private void OnDrawGizmosSelected()
     {

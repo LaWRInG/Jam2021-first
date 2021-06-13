@@ -27,7 +27,7 @@
                     "id": "4c225483-03db-4666-98fa-41ce8e56ce15",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press"
                 },
                 {
                     "name": "attackR",
@@ -150,6 +150,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "attackL",
+                    "type": "Button",
+                    "id": "01d4665b-5128-47fa-b915-560fab49fafc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
                     "name": "attackR",
                     "type": "Button",
                     "id": "55b048d1-d25b-4161-91f1-f73e672c9b4e",
@@ -159,17 +167,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "67336d69-5916-4748-86d3-d38fffbee7ac",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "2D Vector",
                     "id": "c611a7bb-6e62-4056-95ff-99c839bc14e2",
@@ -233,6 +230,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "attackR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ca5a2087-442f-48e7-a6dd-75582abdd800",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "attackL",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "67336d69-5916-4748-86d3-d38fffbee7ac",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

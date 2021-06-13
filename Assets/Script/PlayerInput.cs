@@ -40,7 +40,7 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                     ""id"": ""4c225483-03db-4666-98fa-41ce8e56ce15"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Press""
                 },
                 {
                     ""name"": ""attackR"",
@@ -163,6 +163,14 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""attackL"",
+                    ""type"": ""Button"",
+                    ""id"": ""01d4665b-5128-47fa-b915-560fab49fafc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
                     ""name"": ""attackR"",
                     ""type"": ""Button"",
                     ""id"": ""55b048d1-d25b-4161-91f1-f73e672c9b4e"",
@@ -172,17 +180,6 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""67336d69-5916-4748-86d3-d38fffbee7ac"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": ""2D Vector"",
                     ""id"": ""c611a7bb-6e62-4056-95ff-99c839bc14e2"",
@@ -248,6 +245,28 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                     ""action"": ""attackR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ca5a2087-442f-48e7-a6dd-75582abdd800"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""attackL"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""67336d69-5916-4748-86d3-d38fffbee7ac"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -264,6 +283,7 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
         m_Swicth = asset.FindActionMap("Swicth", throwIfNotFound: true);
         m_Swicth_move = m_Swicth.FindAction("move", throwIfNotFound: true);
         m_Swicth_jump = m_Swicth.FindAction("jump", throwIfNotFound: true);
+        m_Swicth_attackL = m_Swicth.FindAction("attackL", throwIfNotFound: true);
         m_Swicth_attackR = m_Swicth.FindAction("attackR", throwIfNotFound: true);
     }
 
@@ -373,6 +393,7 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
     private ISwicthActions m_SwicthActionsCallbackInterface;
     private readonly InputAction m_Swicth_move;
     private readonly InputAction m_Swicth_jump;
+    private readonly InputAction m_Swicth_attackL;
     private readonly InputAction m_Swicth_attackR;
     public struct SwicthActions
     {
@@ -380,6 +401,7 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
         public SwicthActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @move => m_Wrapper.m_Swicth_move;
         public InputAction @jump => m_Wrapper.m_Swicth_jump;
+        public InputAction @attackL => m_Wrapper.m_Swicth_attackL;
         public InputAction @attackR => m_Wrapper.m_Swicth_attackR;
         public InputActionMap Get() { return m_Wrapper.m_Swicth; }
         public void Enable() { Get().Enable(); }
@@ -396,6 +418,9 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                 @jump.started -= m_Wrapper.m_SwicthActionsCallbackInterface.OnJump;
                 @jump.performed -= m_Wrapper.m_SwicthActionsCallbackInterface.OnJump;
                 @jump.canceled -= m_Wrapper.m_SwicthActionsCallbackInterface.OnJump;
+                @attackL.started -= m_Wrapper.m_SwicthActionsCallbackInterface.OnAttackL;
+                @attackL.performed -= m_Wrapper.m_SwicthActionsCallbackInterface.OnAttackL;
+                @attackL.canceled -= m_Wrapper.m_SwicthActionsCallbackInterface.OnAttackL;
                 @attackR.started -= m_Wrapper.m_SwicthActionsCallbackInterface.OnAttackR;
                 @attackR.performed -= m_Wrapper.m_SwicthActionsCallbackInterface.OnAttackR;
                 @attackR.canceled -= m_Wrapper.m_SwicthActionsCallbackInterface.OnAttackR;
@@ -409,6 +434,9 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                 @jump.started += instance.OnJump;
                 @jump.performed += instance.OnJump;
                 @jump.canceled += instance.OnJump;
+                @attackL.started += instance.OnAttackL;
+                @attackL.performed += instance.OnAttackL;
+                @attackL.canceled += instance.OnAttackL;
                 @attackR.started += instance.OnAttackR;
                 @attackR.performed += instance.OnAttackR;
                 @attackR.canceled += instance.OnAttackR;
@@ -427,6 +455,7 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnAttackL(InputAction.CallbackContext context);
         void OnAttackR(InputAction.CallbackContext context);
     }
 }
