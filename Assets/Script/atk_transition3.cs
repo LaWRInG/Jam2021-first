@@ -12,7 +12,7 @@ public class atk_transition3 : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (PlayerControls.ins.attacking)
+        if (CombatManager.ins.attacking)
         {
             PlayerControls.ins.anim.Play("player_atk1");
         }
@@ -20,7 +20,7 @@ public class atk_transition3 : StateMachineBehaviour
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PlayerControls.ins.attacking = false;
+        CombatManager.ins.attacking = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -580,6 +580,7 @@ GameObject:
   - component: {fileID: 1518675797}
   - component: {fileID: 1518675796}
   - component: {fileID: 1518675795}
+  - component: {fileID: 1518675801}
   - component: {fileID: 1518675794}
   - component: {fileID: 1518675800}
   m_Layer: 6
@@ -648,8 +649,8 @@ MonoBehaviour:
     m_ActionName: Normal/jump[/Keyboard/w]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1518675795}
-        m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
+      - m_Target: {fileID: 1518675801}
+        m_TargetAssemblyTypeName: CombatManager, Assembly-CSharp
         m_MethodName: AttackL
         m_Mode: 0
         m_Arguments:
@@ -664,8 +665,8 @@ MonoBehaviour:
     m_ActionName: Normal/attackL[/Keyboard/leftArrow]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1518675795}
-        m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
+      - m_Target: {fileID: 1518675801}
+        m_TargetAssemblyTypeName: CombatManager, Assembly-CSharp
         m_MethodName: AttackR
         m_Mode: 0
         m_Arguments:
@@ -712,8 +713,8 @@ MonoBehaviour:
     m_ActionName: Swicth/jump[/Keyboard/upArrow]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1518675795}
-        m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
+      - m_Target: {fileID: 1518675801}
+        m_TargetAssemblyTypeName: CombatManager, Assembly-CSharp
         m_MethodName: AttackR
         m_Mode: 0
         m_Arguments:
@@ -728,8 +729,8 @@ MonoBehaviour:
     m_ActionName: Swicth/attackR[/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1518675795}
-        m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
+      - m_Target: {fileID: 1518675801}
+        m_TargetAssemblyTypeName: CombatManager, Assembly-CSharp
         m_MethodName: AttackL
         m_Mode: 0
         m_Arguments:
@@ -765,13 +766,6 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 8
-  attacking: 0
-  attackL: 0
-  attackRange: 0.5
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 128
-  attackPoint: {fileID: 1714462592}
 --- !u!50 &1518675796
 Rigidbody2D:
   serializedVersion: 4
@@ -904,6 +898,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1518675801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518675793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff37c74ad582daf43ae9e54c093ce621, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  attacking: 0
+  attackR: 0
+  attackL: 0
+  attackRange: 0.5
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  attackPoint: {fileID: 1714462592}
 --- !u!1 &1714462591
 GameObject:
   m_ObjectHideFlags: 0

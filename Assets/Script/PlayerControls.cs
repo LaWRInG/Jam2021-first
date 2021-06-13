@@ -18,23 +18,12 @@ public class PlayerControls : MonoBehaviour
 
     private Collider2D col;
 
-
-
-
     [Header("Movement")]
     [SerializeField] float speed = 5f;
     [SerializeField] float jumpfroce = 5f;
     [SerializeField] private LayerMask ground;
 
     private float inputx;
-
-
-    [Header("Combat")]
-    public bool attacking;
-    public bool attackL;
-    [SerializeField] float attackRange = 0.5f;
-    [SerializeField] LayerMask enemyLayers;
-    [SerializeField] Transform attackPoint;
 
     private void Awake()
     {
@@ -96,61 +85,6 @@ public class PlayerControls : MonoBehaviour
         inputx = context.ReadValue<Vector2>().x;
         Debug.Log(inputx);
         Debug.Log("WASD");
-    }
-
-    public void AttackR(InputAction.CallbackContext context)
-    {
-        Debug.Log("click");
-        if (context.performed)
-        {
-            if (transform.localScale == new Vector3(-1f, 1, 1f))
-            {
-                transform.localScale = Vector3.one;
-            }
-
-            attacking = true;
-
-            Collider2D[] hitEnimies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-            foreach (Collider2D enemy in hitEnimies)
-            {
-                Debug.Log("hit");
-            }
-        }
-    }
-
-    public void AttackL(InputAction.CallbackContext context)
-    {
-        Debug.Log("click");
-        if (context.performed)
-        {
-            if (transform.localScale == Vector3.one)
-            {
-                transform.localScale = new Vector3(-1f, 1, 1f);
-            }
-
-            attackL = true;
-            attacking = true;
-
-            Collider2D[] hitEnimies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-            foreach (Collider2D enemy in hitEnimies)
-            {
-                Debug.Log("hit");
-            }
-        }
-    }
-
-
-
-    private void OnDrawGizmosSelected()
-    {
-        if (attackPoint == null)
-        {
-            return;
-        }
-
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
 
