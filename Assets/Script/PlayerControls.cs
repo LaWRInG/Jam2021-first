@@ -6,25 +6,34 @@ using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour
 {
-    [SerializeField] float speed = 5f, jumpfroce = 5f;
-
+    
     public static PlayerControls ins;
 
     private PlayerInputAction playerAction;
 
-    private float inputx;
-
-    public bool attacking;
+    [Header("Set-up")]
+    public Animator anim;
 
     private Rigidbody2D rb;
 
     private Collider2D col;
 
-    public Animator anim;
 
+
+
+    [Header("Movement")]
+    [SerializeField] float speed = 5f;
+    [SerializeField] float jumpfroce = 5f;
     [SerializeField] private LayerMask ground;
 
+    private float inputx;
 
+
+    [Header("Combat")]
+    public bool attacking;
+    [SerializeField] float attackRange = 0.5f;
+    [SerializeField] LayerMask enemyLayers;
+    [SerializeField] Transform attackPoint;
 
     private void Awake()
     {
@@ -90,11 +99,31 @@ public class PlayerControls : MonoBehaviour
 
     public void AttackR(InputAction.CallbackContext context)
     {
+        Debug.Log("click");
         float isAttack = context.ReadValue<float>();
-        if (isAttack == 1)
+        if (context.performed)
         {
             attacking = true;
+
+            Collider2D[] hitEnimies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+            foreach (Collider2D enemy in hitEnimies)
+            {
+                Debug.Log("hit");
+            }
         }
+    }
+
+ 
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+        {
+            return;
+        }
+
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
 

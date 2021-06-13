@@ -161,6 +161,14 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""attackR"",
+                    ""type"": ""Button"",
+                    ""id"": ""55b048d1-d25b-4161-91f1-f73e672c9b4e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -229,6 +237,17 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                     ""action"": ""move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a479b648-40d9-4eb6-a4aa-868b551abf76"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""attackR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -245,6 +264,7 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
         m_Swicth = asset.FindActionMap("Swicth", throwIfNotFound: true);
         m_Swicth_move = m_Swicth.FindAction("move", throwIfNotFound: true);
         m_Swicth_jump = m_Swicth.FindAction("jump", throwIfNotFound: true);
+        m_Swicth_attackR = m_Swicth.FindAction("attackR", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -353,12 +373,14 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
     private ISwicthActions m_SwicthActionsCallbackInterface;
     private readonly InputAction m_Swicth_move;
     private readonly InputAction m_Swicth_jump;
+    private readonly InputAction m_Swicth_attackR;
     public struct SwicthActions
     {
         private @PlayerInputAction m_Wrapper;
         public SwicthActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @move => m_Wrapper.m_Swicth_move;
         public InputAction @jump => m_Wrapper.m_Swicth_jump;
+        public InputAction @attackR => m_Wrapper.m_Swicth_attackR;
         public InputActionMap Get() { return m_Wrapper.m_Swicth; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -374,6 +396,9 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                 @jump.started -= m_Wrapper.m_SwicthActionsCallbackInterface.OnJump;
                 @jump.performed -= m_Wrapper.m_SwicthActionsCallbackInterface.OnJump;
                 @jump.canceled -= m_Wrapper.m_SwicthActionsCallbackInterface.OnJump;
+                @attackR.started -= m_Wrapper.m_SwicthActionsCallbackInterface.OnAttackR;
+                @attackR.performed -= m_Wrapper.m_SwicthActionsCallbackInterface.OnAttackR;
+                @attackR.canceled -= m_Wrapper.m_SwicthActionsCallbackInterface.OnAttackR;
             }
             m_Wrapper.m_SwicthActionsCallbackInterface = instance;
             if (instance != null)
@@ -384,6 +409,9 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                 @jump.started += instance.OnJump;
                 @jump.performed += instance.OnJump;
                 @jump.canceled += instance.OnJump;
+                @attackR.started += instance.OnAttackR;
+                @attackR.performed += instance.OnAttackR;
+                @attackR.canceled += instance.OnAttackR;
             }
         }
     }
@@ -399,5 +427,6 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnAttackR(InputAction.CallbackContext context);
     }
 }
